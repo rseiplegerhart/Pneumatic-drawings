@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "pneumatic-drawings"
+version = "0.1.0"
+description = "Interactive ISO 1219-1 pneumatic circuit drawing generator"
+requires-python = ">=3.10"
+dependencies = ["reportlab>=4.0.0"]
+
+[project.scripts]
+pneumatic = "pneumatic.cli:run"
