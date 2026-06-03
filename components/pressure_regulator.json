@@ -1,0 +1,10 @@
+{
+  "tag": "PR1",
+  "comp_type": "pressure_regulator",
+  "label": "Supply Regulator",
+  "manufacturer": "Norgren",
+  "model": "B64G-4GK-AD3-RMG",
+  "max_pressure_bar": 10,
+  "set_pressure_bar": 6,
+  "notes": "Main line pressure regulator, set to 6 bar"
+}

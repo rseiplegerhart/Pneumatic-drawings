@@ -1,0 +1,10 @@
+{
+  "tag": "CYL1",
+  "comp_type": "cylinder_da",
+  "label": "Clamp Cylinder",
+  "manufacturer": "Festo",
+  "model": "DNC-63-200-PPV",
+  "bore_mm": 63,
+  "stroke_mm": 200,
+  "notes": "Main clamping actuator on Station 1"
+}

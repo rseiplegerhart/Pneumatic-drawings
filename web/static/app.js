@@ -157,6 +157,64 @@ function collectData() {
   };
 }
 
+async function interpret() {
+  const prompt = document.getElementById("ai-prompt").value.trim();
+  const btn    = document.querySelector(".btn-ai");
+  const status = document.getElementById("ai-status");
+
+  if (!prompt) {
+    status.textContent = "Please enter a description first.";
+    status.className = "error";
+    return;
+  }
+
+  btn.disabled = true;
+  status.textContent = "Asking Claude…";
+  status.className = "";
+
+  try {
+    const resp = await fetch("/interpret", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt }),
+    });
+
+    const data = await resp.json();
+
+    if (!resp.ok) {
+      throw new Error(data.error || resp.statusText);
+    }
+
+    // Clear existing components and connections
+    document.getElementById("components-list").innerHTML = "";
+    document.getElementById("connections-list").innerHTML = "";
+    compCount = 0;
+    connCount = 0;
+    document.getElementById("no-components").style.display = "";
+    document.getElementById("no-connections").style.display = "";
+
+    // Populate header fields
+    if (data.title)    document.getElementById("title").value    = data.title;
+    if (data.drawn_by) document.getElementById("drawn_by").value = data.drawn_by;
+    if (data.date)     document.getElementById("date").value     = data.date;
+
+    // Populate components
+    (data.components || []).forEach(c => addComponent(c));
+
+    // Populate connections
+    (data.connections || []).forEach(c => addConnection(c));
+
+    status.textContent = `Circuit generated: ${(data.components || []).length} component(s), ${(data.connections || []).length} connection(s). Review below and click Generate PDF when ready.`;
+    status.className = "ok";
+
+  } catch (err) {
+    status.textContent = "Error: " + err.message;
+    status.className = "error";
+  } finally {
+    btn.disabled = false;
+  }
+}
+
 async function generate() {
   const btn    = document.querySelector(".btn-generate");
   const status = document.getElementById("status");

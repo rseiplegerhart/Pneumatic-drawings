@@ -9,10 +9,29 @@
 <body>
   <header>
     <h1>Pneumatic Drawing Generator</h1>
-    <p>ISO 1219-1 &mdash; Fill in the form below and click <strong>Generate PDF</strong></p>
+    <p>ISO 1219-1 &mdash; Describe your circuit or build it manually below</p>
   </header>
 
   <main>
+
+    {% if ai_enabled %}
+    <!-- AI Prompt -->
+    <section class="card ai-card">
+      <h2>&#9889; Describe Your Circuit</h2>
+      <p class="ai-hint">Type what you need in plain English. Claude will generate the circuit for you to review and edit before saving.</p>
+      <div class="ai-row">
+        <textarea id="ai-prompt" rows="3" placeholder="e.g. A double-acting clamp cylinder controlled by a 5/2 solenoid valve with speed controls on both ports and an upstream pressure regulator and gauge."></textarea>
+        <button class="btn-ai" onclick="interpret()">&#10003; Generate from Description</button>
+      </div>
+      <p id="ai-status"></p>
+    </section>
+    {% else %}
+    <section class="card ai-card ai-disabled">
+      <h2>&#9889; AI Circuit Generation</h2>
+      <p>Set the <code>ANTHROPIC_API_KEY</code> environment variable on the server to enable natural language circuit generation.</p>
+    </section>
+    {% endif %}
+
     <!-- Drawing Info -->
     <section class="card">
       <h2>Drawing Information</h2>
@@ -35,9 +54,7 @@
         <h2>Components</h2>
         <button class="btn-add" onclick="addComponent()">+ Add Component</button>
       </div>
-      <div id="components-list">
-        <!-- rows injected by JS -->
-      </div>
+      <div id="components-list"></div>
       <p class="hint" id="no-components">No components added yet. Click <em>+ Add Component</em> to start.</p>
     </section>
 

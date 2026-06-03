@@ -1,0 +1,10 @@
+{
+  "tag": "V1",
+  "comp_type": "valve_52",
+  "label": "Main Control Valve",
+  "actuator": "solenoid",
+  "spring_return": true,
+  "manufacturer": "SMC",
+  "model": "VF3130-5G-02",
+  "notes": "5/2 solenoid valve, spring return, 24VDC"
+}
