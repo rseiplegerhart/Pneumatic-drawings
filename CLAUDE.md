@@ -93,6 +93,11 @@ Valve fields: `actuator` = `"solenoid"` | `"manual"` | `"pilot"` | `"spring"`, `
 - Place supply at col 0, route left → right in airflow order
 - Keep col spacing consistent; valves are wide so leave a gap after them
 
+**Page limits (A3 landscape, GRID_X=160, MARGIN_X=100):**
+- Max safe column: **6** (x = 100 + 6×160 = 1060 pts; page width ≈ 1190 pts)
+- Max safe row: **4** (y = 842 − 120 − 4×140 = 162 pts; title block ends at y ≈ 55 pts)
+- For circuits wider than 7 columns, stack sub-circuits vertically rather than extending horizontally
+
 ---
 
 ## Component Library (`components/*.json`)
